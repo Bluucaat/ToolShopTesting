@@ -1,0 +1,15 @@
+node_modules/
+jspm_packages/
+
+.env
+.env.test
+.env.local
+.env.production
+
+wdio.log
+errorShots/
+screenshots/
+allure-results/
+allure-report/
+reports/
+test-results/

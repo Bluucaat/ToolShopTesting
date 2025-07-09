@@ -11,5 +11,8 @@ errorShots/
 screenshots/
 allure-results/
 allure-report/
+.allure/
 reports/
 test-results/
+
+desktop.ini

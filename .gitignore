@@ -11,7 +11,7 @@ errorShots/
 screenshots/
 allure-results/
 allure-report/
-.allure
+.allure/
 reports/
 test-results/
 

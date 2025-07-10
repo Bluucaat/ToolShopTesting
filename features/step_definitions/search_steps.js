@@ -1,8 +1,6 @@
 import { When, Then } from '@wdio/cucumber-framework';
 import HomePage from '../../pages/HomePage.js';
 import { expect } from '@wdio/globals';
-import { EventEmitter } from 'events';
-
 
 When('I search for {string}', async (product_name) => {
     await HomePage.search(product_name);
@@ -23,7 +21,6 @@ When('I filter products by subcategory {string}', async (subCategory) => {
 });
 
 When('I click on a product', async () => {
-
     const filterCompleted = $('div[data-test="filter_completed"]');
     await filterCompleted.waitForDisplayed(5000);
 
@@ -37,9 +34,9 @@ Then('I should see products matching {string}', async (productName) => {
     expect(foundProductName).toHaveText(productName);
 });
 
-Then('I should see that there are no products found', async () => {
-    const noProductsMessage = await $('//div[contains(text(), "There are no products found.")]');
-    expect(noProductsMessage).toBeDisplayed();
+Then('I should see that {string}', async (noProductsMessage) => {
+    const noProductsMessageElement = await $(`//div[contains(text(), "${noProductsMessage}")]`);
+    expect(noProductsMessageElement).toBeDisplayed();
 });
 
 Then('I should see the item description containing {string}', async (subCategory) => {
@@ -49,24 +46,17 @@ Then('I should see the item description containing {string}', async (subCategory
 });
 
 Then('I should see products within the {string} and {string} range', async (minPrice, maxPrice) => {
+    const { actualMinValue, actualMaxValue } = await HomePage.getCurrentPriceRange();
+    const prices = await HomePage.getFormattedProductPrices();
 
-    minPrice = parseInt(minPrice);
-    maxPrice = parseInt(maxPrice);
+    await expect(actualMinValue).toEqual(minPrice);
+    await expect(actualMaxValue).toEqual(maxPrice);
 
-    const priceElements = await $$('[data-test="product-price"]');
-
-    if (priceElements.length > 0) {
-        for (const priceElement of priceElements) {
-            const priceText = await priceElement.getText();
-            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-            expect(price).toBeGreaterThanOrEqual(minPrice);
-            expect(price).toBeLessThanOrEqual(maxPrice);
+    if (prices.length > 0) {
+        for (const price of prices) {
+            await expect(price).toBeGreaterThanOrEqual(parseFloat(minPrice));
+            await expect(price).toBeLessThanOrEqual(parseFloat(maxPrice));
         }
-    } else {
-        const actualMinValue = parseInt(await HomePage.minimumPriceSlider.getAttribute('aria-valuenow'));
-        const actualMaxValue = parseInt(await HomePage.maximumPriceSlider.getAttribute('aria-valuenow'));
-        expect(actualMinValue).toEqual(minPrice);
-        expect(actualMaxValue).toEqual(maxPrice);
     }
 });
 

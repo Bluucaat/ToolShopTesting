@@ -1,12 +1,7 @@
-import { Given, When, Then } from '@wdio/cucumber-framework';
+import { When, Then } from '@wdio/cucumber-framework';
 import { expect } from '@wdio/globals';
 
-
-When('I enter a valid {string} and {string}', async (email, password) => {
-    await enterCredentials(email, password);
-});
-
-When('I enter an invalid {string} and {string}', async (email, password) => {
+When(/^I enter (a|an) (valid|invalid) "([^"]*)" and "([^"]*)"$/, async (_, __, email, password) => {
     await enterCredentials(email, password);
 });
 

@@ -23,15 +23,15 @@ exports.config = {
                 ]
             }
         },
-        // {
-        //     browserName: 'safari'
-        // }
+        {
+            browserName: 'safari'
+        }
     ],
     logLevel: 'error',
     bail: 0,
     waitforTimeout: 10000,
-    connectionRetryTimeout: 120000,
-    connectionRetryCount: 3,
+    connectionRetryTimeout: 10000,
+    connectionRetryCount: 2,
     framework: 'cucumber',
     specFileRetries: 2,
     cucumberOpts: {

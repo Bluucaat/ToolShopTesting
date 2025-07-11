@@ -14,5 +14,8 @@
     "@wdio/cli": "^9.16.2",
     "@wdio/cucumber-framework": "^9.16.2",
     "@wdio/local-runner": "^9.16.2"
+  },
+  "dependencies": {
+    "chai": "^5.2.1"
   }
 }

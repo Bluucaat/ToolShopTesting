@@ -5,12 +5,12 @@ class HomePage {
         this.sortField = $('[data-test="sort"]');
         this.minimumPriceSlider = $('span.ngx-slider-pointer-min');
         this.maximumPriceSlider = $('span.ngx-slider-pointer-max');
+        this.productPrices = $$('[data-test="product-price"]');
     }
     async search(itemName) {
         await this.searchField.setValue(itemName);
         await this.searchButton.click();
     }
-
 
     async setMinPrice(targetPrice) {
         await this._setSlider(this.minimumPriceSlider, targetPrice);
@@ -18,6 +18,12 @@ class HomePage {
 
     async setMaxPrice(targetPrice) {
         await this._setSlider(this.maximumPriceSlider, targetPrice);
+    }
+
+    async getCurrentPriceRange() {
+        const actualMinValue = await this.minimumPriceSlider.getAttribute('aria-valuenow');
+        const actualMaxValue = await this.maximumPriceSlider.getAttribute('aria-valuenow');
+        return { actualMinValue, actualMaxValue };
     }
 
     async _setSlider(slider, targetPrice) {
@@ -36,8 +42,18 @@ class HomePage {
             const keys = Array(steps).fill(key);
             await browser.keys(keys);
         }
+        await browser.pause(777);
+    }
+    async getFormattedProductPrices() {
+        const priceElements = await this.productPrices;
+        const prices = [];
 
-        await browser.pause(1000);
+        for (const priceElement of priceElements) {
+            const priceText = await priceElement.getText();
+            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+            prices.push(price);
+        }
+        return prices;
     }
 }
 

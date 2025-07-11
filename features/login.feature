@@ -2,6 +2,7 @@ Feature: User Login
 
   Background:
     Given I am on the "login" page
+    Then the "login" page should be loaded
 
   Scenario Outline: Successful Login with Valid Credetils
     When I enter a valid "<email>" and "<password>"

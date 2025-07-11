@@ -22,6 +22,8 @@ Then("I should see an {string}", async (errorMessage) => {
 Then("I should remain on the login page", async () => {
     const currentUrl = await browser.getUrl();
     expect(currentUrl).toContain("/login");
+    const loginForm = $('[data-test = "login-form"]');
+    await expect(loginForm).toBeDisplayed();
 });
 
 async function enterCredentials(email, password) {

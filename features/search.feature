@@ -5,6 +5,7 @@ Feature: Item search
 
   Background:
     Given I am on the "home" page
+    Then the "home" page should be loaded
 
   Scenario Outline: Filter products by subcategory
     When I filter products by subcategory "<subcategory>"

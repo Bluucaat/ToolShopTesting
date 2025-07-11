@@ -1,12 +1,17 @@
 class HomePage {
-    constructor() {
-        this.searchField = $('input[data-test="search-query"]');
-        this.searchButton = $('[data-test="search-submit"]');
-        this.sortField = $('[data-test="sort"]');
-        this.minimumPriceSlider = $('span.ngx-slider-pointer-min');
-        this.maximumPriceSlider = $('span.ngx-slider-pointer-max');
-        this.productPrices = $$('[data-test="product-price"]');
-    }
+    get searchField() { return $('input[data-test="search-query"]'); }
+    get searchButton() { return $('[data-test="search-submit"]'); }
+    get sortField() { return $('[data-test="sort"]'); }
+    get minimumPriceSlider() { return $('span.ngx-slider-pointer-min'); }
+    get maximumPriceSlider() { return $('span.ngx-slider-pointer-max'); }
+    get productPrices() { return $$('[data-test="product-price"]'); }
+    get filterCompleted() { return $('div[data-test="filter_completed"]'); }
+    get firstCard() { $('a.card'); }
+    get foundProductName() { return $('[data-test="product-name"]'); }
+    get categoryElement() { $('[aria-label="category"]'); }
+    noProductsMessageElement(noProductsMessage) { return $(`//div[contains(text(), "${noProductsMessage}")]`); }
+    subCategoryElement(subCategory) { return $(`//div[@class="checkbox"]//label[contains(text(), "${subCategory}")]`); }
+
     async search(itemName) {
         await this.searchField.setValue(itemName);
         await this.searchButton.click();
@@ -42,7 +47,7 @@ class HomePage {
             const keys = Array(steps).fill(key);
             await browser.keys(keys);
         }
-        await browser.pause(777);
+        await browser.pause(1000);
     }
     async getFormattedProductPrices() {
         const priceElements = await this.productPrices;

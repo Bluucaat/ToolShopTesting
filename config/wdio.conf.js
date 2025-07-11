@@ -1,6 +1,6 @@
 exports.config = {
     runner: 'local',
-    specs: ['./features/**/*.feature'],
+    specs: ['../tests/features/*.feature'],
     exclude: [],
     maxInstances: 4,
     capabilities: [
@@ -9,7 +9,7 @@ exports.config = {
             'goog:chromeOptions': {
                 args: [
                     'headless',
-                    '--window-size=1280,672',
+                    '--window-size=1920,1080',
                     '--disable-gpu'
                 ]
             }
@@ -19,12 +19,9 @@ exports.config = {
             'moz:firefoxOptions': {
                 args: [
                     '--headless',
-                    '--window-size=1280,672'
+                    '--window-size=1920,1080'
                 ]
             }
-        },
-        {
-            browserName: 'safari'
         }
     ],
     logLevel: 'error',
@@ -35,7 +32,7 @@ exports.config = {
     framework: 'cucumber',
     specFileRetries: 2,
     cucumberOpts: {
-        require: ['./features/step_definitions/**/*.js'],
+        require: ['./tests/step-definitions/*.steps.js'],
         backtrace: false,
         requireModule: [],
         dryRun: false,
@@ -48,5 +45,5 @@ exports.config = {
         timeout: 60000,
         ignoreUndefinedDefinitions: false
     },
-    reporters: [['allure', { outputDir: 'allure-results' }]]
+    reporters: [['allure', { outputDir: '../allure-results' }]]
 };

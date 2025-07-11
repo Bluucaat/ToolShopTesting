@@ -6,7 +6,6 @@ Given('I am on the {string} page', async (pageName) => {
         'login': 'https://practicesoftwaretesting.com/auth/login'
     };
     await browser.url(urls[pageName]);
-
 });
 
 Then('the {string} page should be loaded', async (pageName) => {

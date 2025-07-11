@@ -1,5 +1,5 @@
 import { When, Then } from '@wdio/cucumber-framework';
-import HomePage from '../../pages/HomePage.js';
+import HomePage from '../../pages/home.page';
 import { expect } from '@wdio/globals';
 
 When('I search for {string}', async (product_name) => {
@@ -15,33 +15,28 @@ When(/^I set the (minimum|maximum) price to "([^"]*)"$/, async (priceType, newVa
 });
 
 When('I filter products by subcategory {string}', async (subCategory) => {
-    const subCategoryElement = await $(`//div[@class="checkbox"]//label[contains(text(), "${subCategory}")]`);
-    await subCategoryElement.waitForClickable();
+    const subCategoryElement = HomePage.subCategoryElement(subCategory);
+    subCategoryElement.waitForClickable();
     await subCategoryElement.click();
 });
 
 When('I click on a product', async () => {
-    const filterCompleted = $('div[data-test="filter_completed"]');
-    await filterCompleted.waitForDisplayed(5000);
-
-    const firstCard = $('a.card');
-    await firstCard.waitForClickable();
+    await HomePage.filterCompleted.waitForDisplayed();
+    await HomePage.firstCard.waitForClickable();
     await firstCard.click();
 });
 
 Then('I should see products matching {string}', async (productName) => {
-    const foundProductName = await $('[data-test="product-name"]');
-    expect(foundProductName).toHaveText(productName);
+    expect(await HomePage.foundProductName).toHaveText(productName);
 });
 
 Then('I should see that {string}', async (noProductsMessage) => {
-    const noProductsMessageElement = await $(`//div[contains(text(), "${noProductsMessage}")]`);
+    const noProductsMessageElement = HomePage.noProductsMessageElement(noProductsMessage);
     expect(noProductsMessageElement).toBeDisplayed();
 });
 
 Then('I should see the item description containing {string}', async (subCategory) => {
-    const categoryElement = await $('[aria-label="category"]');
-    const actualText = await categoryElement.getText();
+    const actualText = await HomePage.categoryElement.getText();
     await expect(actualText.toLowerCase().trim()).toContain(subCategory.toLowerCase().trim());
 });
 

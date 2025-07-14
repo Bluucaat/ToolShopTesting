@@ -23,7 +23,7 @@ When('I filter products by subcategory {string}', async (subCategory) => {
 When('I click on a product', async () => {
     await HomePage.filterCompleted.waitForDisplayed();
     await HomePage.firstCard.waitForClickable();
-    await firstCard.click();
+    await HomePage.firstCard.click();
 });
 
 Then('I should see products matching {string}', async (productName) => {

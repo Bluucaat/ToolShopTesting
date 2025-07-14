@@ -6,9 +6,9 @@ class HomePage {
     get maximumPriceSlider() { return $('span.ngx-slider-pointer-max'); }
     get productPrices() { return $$('[data-test="product-price"]'); }
     get filterCompleted() { return $('div[data-test="filter_completed"]'); }
-    get firstCard() { $('a.card'); }
+    get firstCard() { return $('a.card'); }
     get foundProductName() { return $('[data-test="product-name"]'); }
-    get categoryElement() { $('[aria-label="category"]'); }
+    get categoryElement() { return $('[aria-label="category"]'); }
     noProductsMessageElement(noProductsMessage) { return $(`//div[contains(text(), "${noProductsMessage}")]`); }
     subCategoryElement(subCategory) { return $(`//div[@class="checkbox"]//label[contains(text(), "${subCategory}")]`); }
 

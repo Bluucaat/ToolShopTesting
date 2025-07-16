@@ -1,3 +1,6 @@
+const { ReportAggregator, HtmlReporter } = require('wdio-html-nice-reporter'); // Ensure correct imports for JS
+let reportAggregator;
+
 exports.config = {
     runner: 'local',
     specs: ['../tests/features/*.feature'],
@@ -45,5 +48,47 @@ exports.config = {
         timeout: 60000,
         ignoreUndefinedDefinitions: false
     },
-    reporters: [['allure', { outputDir: '../allure-results' }]]
+    reporters: [
+        'spec',
+        [
+            'html-nice',
+            {
+                outputDir: './reports/html-reports/',
+                filename: 'report.html',
+                reportTitle: 'HTML report',
+                linkScreenshots: true,
+                showInBrowser: true,
+                collapseTests: false,
+                useOnAfterCommandForScreenshot: false
+            }
+        ],
+        [
+            'allure',
+            {
+                outputDir: './reports/allure-results',
+                disableWebdriverStepsReporting: false,
+                disableWebdriverScreenshotsReporting: false
+            }
+        ]
+    ],
+    onPrepare: function () {
+        // Initialize the ReportAggregator before starting the tests
+        reportAggregator = new ReportAggregator({
+            outputDir: './reports/html-reports/', // Path to save aggregated report
+            filename: 'master-report.html', // Aggregated report file
+            reportTitle: 'Master Report', // Title for the aggregated report
+            collapseTests: true, // Collapse tests by default
+        });
+
+        // Clean previous report files before executing new tests
+        reportAggregator.clean();
+        console.log('Aggregator initialized and old reports cleaned.');
+    },
+
+    onComplete: async function () {
+        // Use the ReportAggregator to create the master report
+        console.log('Generating master report...');
+        await reportAggregator.createReport();
+        console.log('Master report generated successfully!');
+    },
 };

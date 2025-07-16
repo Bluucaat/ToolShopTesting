@@ -72,21 +72,18 @@ exports.config = {
         ]
     ],
     onPrepare: function () {
-        // Initialize the ReportAggregator before starting the tests
         reportAggregator = new ReportAggregator({
-            outputDir: './reports/html-reports/', // Path to save aggregated report
-            filename: 'master-report.html', // Aggregated report file
-            reportTitle: 'Master Report', // Title for the aggregated report
-            collapseTests: true, // Collapse tests by default
+            outputDir: './reports/html-reports/',
+            filename: 'master-report.html',
+            reportTitle: 'Master Report',
+            collapseTests: true,
         });
 
-        // Clean previous report files before executing new tests
         reportAggregator.clean();
         console.log('Aggregator initialized and old reports cleaned.');
     },
 
     onComplete: async function () {
-        // Use the ReportAggregator to create the master report
         console.log('Generating master report...');
         await reportAggregator.createReport();
         console.log('Master report generated successfully!');

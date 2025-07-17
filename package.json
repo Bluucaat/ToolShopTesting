@@ -5,6 +5,7 @@
   "scripts": {
     "test": "npx wdio run ./config/wdio.conf.js",
     "lint": "npx eslint .",
+    "lint-fix": "npx eslint . --fix",
     "prettier": "prettier --write ."
   },
   "keywords": [],

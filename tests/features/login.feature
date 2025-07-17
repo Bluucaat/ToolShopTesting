@@ -1,9 +1,11 @@
+@ui @login
 Feature: User Login
 
   Background:
     Given I am on the "login" page
     Then the "login" page should be loaded
 
+  @smoke
   Scenario Outline: Successful Login with Valid Credentials
     When I enter a valid "<email>" and <password>
     And I click the login Button
@@ -14,6 +16,7 @@ Feature: User Login
       | admin@practicesoftwaretesting.com    | validPassword | John Doe |
       | customer@practicesoftwaretesting.com | validPassword | Jane Doe |
 
+  @regression @invalid
   Scenario Outline: Unsuccessful Login with Invalid Credentials
     When I enter an invalid "<email>" and <password>
     And I click the login Button

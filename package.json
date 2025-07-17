@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx wdio run ./config/wdio.conf.js"
+    "test": "npx wdio run ./config/wdio.conf.js",
+    "lint": "npx eslint .",
+    "prettier": "prettier --write ."
   },
   "keywords": [],
   "author": "",

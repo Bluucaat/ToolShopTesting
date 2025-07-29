@@ -15,4 +15,5 @@ allure-report/
 reports/
 test-results/
 
+.vscode/
 desktop.ini

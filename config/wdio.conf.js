@@ -10,15 +10,22 @@ exports.config = {
     {
       browserName: 'chrome',
       'goog:chromeOptions': {
-        args: ['headless', '--window-size=1920,1080', '--disable-gpu'],
-      },
+        args: [
+          'headless',
+          '--window-size=1920,1080',
+          '--disable-gpu'
+        ]
+      }
     },
     {
       browserName: 'firefox',
       'moz:firefoxOptions': {
-        args: ['--headless', '--window-size=1920,1080'],
-      },
-    },
+        args: [
+          '--headless',
+          '--window-size=1920,1080'
+        ]
+      }
+    }
   ],
   logLevel: 'error',
   bail: 0,
@@ -39,7 +46,7 @@ exports.config = {
     strict: false,
     tagExpression: '',
     timeout: 60000,
-    ignoreUndefinedDefinitions: false,
+    ignoreUndefinedDefinitions: false
   },
   reporters: [
     'spec',
@@ -52,17 +59,17 @@ exports.config = {
         linkScreenshots: true,
         showInBrowser: true,
         collapseTests: false,
-        useOnAfterCommandForScreenshot: false,
-      },
+        useOnAfterCommandForScreenshot: true
+      }
     ],
     [
       'allure',
       {
         outputDir: './reports/allure-results',
         disableWebdriverStepsReporting: false,
-        disableWebdriverScreenshotsReporting: false,
-      },
-    ],
+        disableWebdriverScreenshotsReporting: false
+      }
+    ]
   ],
   onPrepare: function () {
     reportAggregator = new ReportAggregator({

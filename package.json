@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx wdio run ./config/wdio.conf.js",
+    "test-all": "npx wdio run ./config/wdio.conf.js",
+    "test-ui": "npx wdio run ./config/wdio.conf.js --cucumberOpts.tags='@ui'",
+    "test-smoke": "npx wdio run ./config/wdio.conf.js --cucumberOpts.tags='@smoke'",
+    "test-critical": "npx wdio run ./config/wdio.conf.js --cucumberOpts.tags='@critical'",
+    "test-invalid": "npx wdio run ./config/wdio.conf.js --cucumberOpts.tags='@invalid'",
     "lint": "npx eslint .",
     "lint-fix": "npx eslint . --fix",
     "prettier": "prettier --write ."

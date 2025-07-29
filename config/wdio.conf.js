@@ -1,4 +1,4 @@
-const { ReportAggregator, HtmlReporter } = require('wdio-html-nice-reporter'); // Ensure correct imports for JS
+const { ReportAggregator, HtmlReporter } = require('wdio-html-nice-reporter');
 let reportAggregator;
 
 exports.config = {

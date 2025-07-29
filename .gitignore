@@ -9,7 +9,7 @@ jspm_packages/
 wdio.log
 errorShots/
 screenshots/
-allure-results/
+reports
 allure-report/
 .allure/
 reports/
